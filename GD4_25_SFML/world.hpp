@@ -28,8 +28,3 @@ private:
 	Aircraft* m_player_aircraft;
 };
 
-
-
-
-};
-

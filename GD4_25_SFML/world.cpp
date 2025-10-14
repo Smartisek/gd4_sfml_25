@@ -64,11 +64,22 @@ void World::BuildScene()
 
 	//Add the background sprite to the world
 	std::unique_ptr<SpriteNode> background_sprite(new SpriteNode(texture, textureRect));
-	background_sprite->setPosition(sf::Vector2f(0, m_world_bounds.size.y));
+	background_sprite->setPosition(sf::Vector2f(0, 0));
 	m_scene_layers[static_cast<int>(SceneLayers::kBackground)]->AttachChild(std::move(background_sprite));
 
 	//Homework add the player's aircraft
 	//Add two Raptor escort planes that are 50 units behind the plane and 80 units either side of the player's plane
+	std::unique_ptr<Aircraft> leader(new Aircraft(AircraftType::kEagle, m_textures));
+	m_player_aircraft = leader.get();
+	m_player_aircraft->setPosition(m_spawn_position);
+	m_player_aircraft->SetVelocity(40.f, m_scroll_speed);
+	m_scene_layers[static_cast<int>(SceneLayers::kAir)]->AttachChild(std::move(leader));
 
+	std::unique_ptr<Aircraft> left_escort(new Aircraft(AircraftType::kRaptor, m_textures));
+	left_escort->setPosition(sf::Vector2f(- 80.f, 50.f));
+	m_player_aircraft->AttachChild(std::move(left_escort));
 
+	std::unique_ptr<Aircraft> right_escort(new Aircraft(AircraftType::kRaptor, m_textures));
+	right_escort->setPosition(sf::Vector2f(80.f, 50.f));
+	m_player_aircraft->AttachChild(std::move(right_escort));
 }
