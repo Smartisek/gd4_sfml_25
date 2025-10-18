@@ -1,5 +1,6 @@
 #include "world.hpp"
 #include "sprite_node.hpp"
+#include <iostream>
 
 World::World(sf::RenderWindow& window)
 	: m_window(window)
@@ -77,6 +78,7 @@ void World::BuildScene()
 	//Add two Raptor escort planes that are 50 units behind the plane and 80 units either side of the player's plane
 	std::unique_ptr<Aircraft> leader(new Aircraft(AircraftType::kEagle, m_textures));
 	m_player_aircraft = leader.get();
+	std::cout << m_spawn_position.x << m_spawn_position.y << std::endl;
 	m_player_aircraft->setPosition(m_spawn_position);
 	m_player_aircraft->SetVelocity(40.f, m_scroll_speed);
 	m_scene_layers[static_cast<int>(SceneLayers::kAir)]->AttachChild(std::move(leader));
@@ -112,9 +114,8 @@ void World::AdaptPlayerPosition()
 	sf::Vector2f position = m_player_aircraft->getPosition();
 	position.x = std::min(position.x, view_bounds.size.x - border_distance);
 	position.x = std::max(position.x, border_distance);
-	position.y = std::min(position.y, view_bounds.size.y - border_distance);
-	position.y = std::max(position.y, border_distance);
-
+	position.y = std::min(position.y, view_bounds.position.y + view_bounds.size.y - border_distance);
+	position.y = std::max(position.y, view_bounds.position.y + border_distance);
 	m_player_aircraft->setPosition(position);
 
 }
