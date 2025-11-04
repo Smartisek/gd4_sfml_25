@@ -1,6 +1,7 @@
 #include "world.hpp"
 #include "sprite_node.hpp"
 #include <iostream>
+#include "state.hpp"
 
 World::World(sf::RenderWindow& window)
 	: m_window(window)
@@ -36,11 +37,15 @@ void World::Update(sf::Time dt)
 	AdaptPlayerPosition();
 }
 
+
+
 void World::Draw()
 {
 	m_window.setView(m_camera);
 	m_window.draw(m_scene_graph);
 }
+
+
 
 CommandQueue& World::GetCommandQueue()
 {

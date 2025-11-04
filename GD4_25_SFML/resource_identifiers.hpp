@@ -1,6 +1,7 @@
 #pragma once
 #include "texture_id.hpp"
 #include "resource_holder.hpp"
+#include <SFML/Graphics/Font.hpp>
 
 namespace sf
 {
@@ -10,3 +11,4 @@ namespace sf
 //template<typename Identifier, typename Resource>
 
 typedef ResourceHolder<TextureID, sf::Texture> TextureHolder;
+typedef ResourceHolder<FontID, sf::Font> FontHolder;
