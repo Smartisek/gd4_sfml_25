@@ -6,7 +6,7 @@
 
 MenuState::MenuState(StateStack& stack, Context context) : State(stack, context), m_background_sprite(context.textures->Get(TextureID::kTitleScreen)), m_option_index(0)
 {
-    sf::Font font = context.fonts->Get(FontID::kMain);
+    const sf::Font& font = context.fonts->Get(FontID::kMain);
     sf::Text play_option(font);
     play_option.setString("Play");
     Utility::CentreOrigin(play_option);
@@ -14,9 +14,9 @@ MenuState::MenuState(StateStack& stack, Context context) : State(stack, context)
     m_options.emplace_back(play_option);
 
     sf::Text exit_option(font);
-    play_option.setString("Exit");
+    exit_option.setString("Exit");
     Utility::CentreOrigin(exit_option);
-    play_option.setPosition(play_option.getPosition() + sf::Vector2f(0.f, 30.f));
+    exit_option.setPosition(play_option.getPosition() + sf::Vector2f(0.f, 30.f));
     m_options.emplace_back(exit_option);
 
     UpdateOptionText();
