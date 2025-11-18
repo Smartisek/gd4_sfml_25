@@ -28,7 +28,7 @@ namespace gui
 		virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 
 	private:
-		Callback callback;
+		Callback m_callback;
 		const sf::Texture& m_normal_texture;
 		const sf::Texture& m_selected_texture;
 		const sf::Texture& m_activated_texture;

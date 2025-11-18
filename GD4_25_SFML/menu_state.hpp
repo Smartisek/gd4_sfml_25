@@ -1,6 +1,7 @@
 #pragma once
 #include "state.hpp"
 #include <SFML/Graphics/Sprite.hpp>
+#include "container.hpp"
 
 class MenuState : public State
 {
@@ -13,7 +14,6 @@ public:
 
 private:
 	sf::Sprite m_background_sprite;
-	std::vector<sf::Text> m_options;
-	std::int8_t m_option_index;
+	gui::Container m_gui_container;
 };
 
